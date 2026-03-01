@@ -1,0 +1,294 @@
+{
+  "success": false,
+  "fecha_ejecucion": "2026-01-12T15:00:52.254Z",
+  "ejercicios": [
+    {
+      "ejercicio": 1,
+      "nombre": "git-init",
+      "estado": "aprobado",
+      "tests_totales": 3,
+      "tests_aprobados": 3,
+      "tests_fallidos": 0,
+      "puntos_posibles": 15,
+      "puntos_obtenidos": 15,
+      "porcentaje": 100,
+      "detalles": [
+        {
+          "nombre": "El repositorio Git debe estar inicializado",
+          "estado": "passed",
+          "duracion_ms": 61
+        },
+        {
+          "nombre": "La configuración de usuario debe estar establecida",
+          "estado": "passed",
+          "duracion_ms": 42
+        },
+        {
+          "nombre": "El comando git status debe funcionar correctamente",
+          "estado": "passed",
+          "duracion_ms": 190
+        }
+      ]
+    },
+    {
+      "ejercicio": 2,
+      "nombre": "primer-commit",
+      "estado": "parcial",
+      "tests_totales": 5,
+      "tests_aprobados": 1,
+      "tests_fallidos": 4,
+      "puntos_posibles": 15,
+      "puntos_obtenidos": 3,
+      "porcentaje": 20,
+      "detalles": [
+        {
+          "nombre": "El archivo mi-proyecto.md debe existir con el contenido correcto",
+          "estado": "failed",
+          "duracion_ms": 47
+        },
+        {
+          "nombre": "La carpeta docs debe existir",
+          "estado": "failed",
+          "duracion_ms": 0
+        },
+        {
+          "nombre": "El archivo docs/notas.txt debe existir",
+          "estado": "failed",
+          "duracion_ms": 1
+        },
+        {
+          "nombre": "Debe tener al menos un commit",
+          "estado": "passed",
+          "duracion_ms": 56
+        },
+        {
+          "nombre": "Los archivos deben estar en el último commit",
+          "estado": "failed",
+          "duracion_ms": 56
+        }
+      ]
+    },
+    {
+      "ejercicio": 3,
+      "nombre": "modificar-commits",
+      "estado": "fallido",
+      "tests_totales": 5,
+      "tests_aprobados": 0,
+      "tests_fallidos": 5,
+      "puntos_posibles": 15,
+      "puntos_obtenidos": 0,
+      "porcentaje": 0,
+      "detalles": [
+        {
+          "nombre": "El archivo mi-proyecto.md debe contener las características añadidas",
+          "estado": "failed",
+          "duracion_ms": 55
+        },
+        {
+          "nombre": "El archivo CHANGELOG.md debe existir con el contenido correcto",
+          "estado": "failed",
+          "duracion_ms": 1
+        },
+        {
+          "nombre": "Debe tener al menos 3 commits",
+          "estado": "failed",
+          "duracion_ms": 39
+        },
+        {
+          "nombre": "Los commits deben tener mensajes descriptivos",
+          "estado": "failed",
+          "duracion_ms": 43
+        },
+        {
+          "nombre": "Los archivos deben estar trackeados en Git",
+          "estado": "failed",
+          "duracion_ms": 16
+        }
+      ]
+    },
+    {
+      "ejercicio": 4,
+      "nombre": "ramas",
+      "estado": "parcial",
+      "tests_totales": 6,
+      "tests_aprobados": 2,
+      "tests_fallidos": 4,
+      "puntos_posibles": 15,
+      "puntos_obtenidos": 5,
+      "porcentaje": 33,
+      "detalles": [
+        {
+          "nombre": "El archivo features.txt debe existir con el contenido correcto",
+          "estado": "failed",
+          "duracion_ms": 61
+        },
+        {
+          "nombre": "Debe estar en la rama main",
+          "estado": "passed",
+          "duracion_ms": 73
+        },
+        {
+          "nombre": "La rama feature/nueva-funcionalidad no debe existir",
+          "estado": "passed",
+          "duracion_ms": 75
+        },
+        {
+          "nombre": "Debe tener commits adicionales por el trabajo con ramas",
+          "estado": "failed",
+          "duracion_ms": 59
+        },
+        {
+          "nombre": "El archivo features.txt debe estar trackeado en Git",
+          "estado": "failed",
+          "duracion_ms": 28
+        },
+        {
+          "nombre": "Debe haber evidencia de merge en el historial",
+          "estado": "failed",
+          "duracion_ms": 84
+        }
+      ]
+    },
+    {
+      "ejercicio": 5,
+      "nombre": "github-push",
+      "estado": "parcial",
+      "tests_totales": 5,
+      "tests_aprobados": 1,
+      "tests_fallidos": 4,
+      "puntos_posibles": 15,
+      "puntos_obtenidos": 3,
+      "porcentaje": 20,
+      "detalles": [
+        {
+          "nombre": "El archivo AUTHORS.md debe existir",
+          "estado": "failed",
+          "duracion_ms": 46
+        },
+        {
+          "nombre": "Debe tener un remote configurado",
+          "estado": "passed",
+          "duracion_ms": 24
+        },
+        {
+          "nombre": "Debe tener al menos 5 commits",
+          "estado": "failed",
+          "duracion_ms": 55
+        },
+        {
+          "nombre": "El archivo AUTHORS.md debe estar trackeado en Git",
+          "estado": "failed",
+          "duracion_ms": 18
+        },
+        {
+          "nombre": "No debe haber cambios pendientes",
+          "estado": "failed",
+          "duracion_ms": 154
+        }
+      ]
+    },
+    {
+      "ejercicio": 6,
+      "nombre": "pull-clone",
+      "estado": "fallido",
+      "tests_totales": 6,
+      "tests_aprobados": 0,
+      "tests_fallidos": 6,
+      "puntos_posibles": 10,
+      "puntos_obtenidos": 0,
+      "porcentaje": 0,
+      "detalles": [
+        {
+          "nombre": "El archivo mi-proyecto.md debe contener la actualización desde GitHub",
+          "estado": "failed",
+          "duracion_ms": 56
+        },
+        {
+          "nombre": "El archivo sync-test.txt debe existir",
+          "estado": "failed",
+          "duracion_ms": 0
+        },
+        {
+          "nombre": "Debe tener al menos 6 commits",
+          "estado": "failed",
+          "duracion_ms": 40
+        },
+        {
+          "nombre": "El archivo sync-test.txt debe estar trackeado en Git",
+          "estado": "failed",
+          "duracion_ms": 12
+        },
+        {
+          "nombre": "Debe tener commits que indiquen sincronización",
+          "estado": "failed",
+          "duracion_ms": 47
+        },
+        {
+          "nombre": "El repositorio debe estar limpio (sin cambios pendientes)",
+          "estado": "failed",
+          "duracion_ms": 127
+        }
+      ]
+    },
+    {
+      "ejercicio": 7,
+      "nombre": "conflictos",
+      "estado": "parcial",
+      "tests_totales": 7,
+      "tests_aprobados": 3,
+      "tests_fallidos": 4,
+      "puntos_posibles": 15,
+      "puntos_obtenidos": 6,
+      "porcentaje": 42,
+      "detalles": [
+        {
+          "nombre": "El archivo mi-proyecto.md debe contener información del proyecto combinada",
+          "estado": "failed",
+          "duracion_ms": 117
+        },
+        {
+          "nombre": "No debe existir la rama feature/conflicto-simulado",
+          "estado": "passed",
+          "duracion_ms": 56
+        },
+        {
+          "nombre": "Debe estar en la rama main/master",
+          "estado": "passed",
+          "duracion_ms": 57
+        },
+        {
+          "nombre": "Debe tener evidencia de merge en el historial",
+          "estado": "passed",
+          "duracion_ms": 50
+        },
+        {
+          "nombre": "Debe tener commits relacionados con conflictos",
+          "estado": "failed",
+          "duracion_ms": 63
+        },
+        {
+          "nombre": "El repositorio debe estar limpio",
+          "estado": "failed",
+          "duracion_ms": 123
+        },
+        {
+          "nombre": "Debe tener un número adecuado de commits",
+          "estado": "failed",
+          "duracion_ms": 46
+        }
+      ]
+    }
+  ],
+  "resumen": {
+    "total_ejercicios": 7,
+    "ejercicios_completos": 1,
+    "ejercicios_parciales": 4,
+    "ejercicios_fallidos": 2,
+    "total_tests": 37,
+    "tests_aprobados": 10,
+    "tests_fallidos": 27,
+    "puntos_totales": 100,
+    "puntos_obtenidos": 32,
+    "porcentaje_final": 32
+  }
+}
