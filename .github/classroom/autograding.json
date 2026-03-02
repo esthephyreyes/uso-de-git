@@ -1,0 +1,84 @@
+{
+  "tests": [
+    {
+      "name": "Validar archivo de resultados",
+      "setup": "npm install",
+      "run": "node .autograding/validate-results.js",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": null
+    },
+    {
+      "name": "Ejercicio 1 - Git Init",
+      "setup": "",
+      "run": "node -e \"const r = require('./test-results.json'); const ej = r.ejercicios.find(e => e.ejercicio === 1); if (!ej || ej.puntos_obtenidos === 0) process.exit(1);\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 5,
+      "points": 15
+    },
+    {
+      "name": "Ejercicio 2 - Primer Commit",
+      "setup": "",
+      "run": "node -e \"const r = require('./test-results.json'); const ej = r.ejercicios.find(e => e.ejercicio === 2); if (!ej || ej.puntos_obtenidos === 0) process.exit(1);\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 5,
+      "points": 15
+    },
+    {
+      "name": "Ejercicio 3 - Modificar Commits",
+      "setup": "",
+      "run": "node -e \"const r = require('./test-results.json'); const ej = r.ejercicios.find(e => e.ejercicio === 3); if (!ej || ej.puntos_obtenidos === 0) process.exit(1);\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 5,
+      "points": 15
+    },
+    {
+      "name": "Ejercicio 4 - Ramas",
+      "setup": "",
+      "run": "node -e \"const r = require('./test-results.json'); const ej = r.ejercicios.find(e => e.ejercicio === 4); if (!ej || ej.puntos_obtenidos === 0) process.exit(1);\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 5,
+      "points": 15
+    },
+    {
+      "name": "Ejercicio 5 - GitHub Push",
+      "setup": "",
+      "run": "node -e \"const r = require('./test-results.json'); const ej = r.ejercicios.find(e => e.ejercicio === 5); if (!ej || ej.puntos_obtenidos === 0) process.exit(1);\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 5,
+      "points": 15
+    },
+    {
+      "name": "Ejercicio 6 - Pull y Clone",
+      "setup": "",
+      "run": "node -e \"const r = require('./test-results.json'); const ej = r.ejercicios.find(e => e.ejercicio === 6); if (!ej || ej.puntos_obtenidos === 0) process.exit(1);\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 5,
+      "points": 10
+    },
+    {
+      "name": "Ejercicio 7 - Conflictos",
+      "setup": "",
+      "run": "node -e \"const r = require('./test-results.json'); const ej = r.ejercicios.find(e => e.ejercicio === 7); if (!ej || ej.puntos_obtenidos === 0) process.exit(1);\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 5,
+      "points": 15
+    }
+  ]
+}

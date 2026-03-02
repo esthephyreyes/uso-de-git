@@ -1,0 +1,197 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+    
+    - name: Cache node_modules
+      uses: actions/cache@v4
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    # Validar el archivo de resultados generado localmente
+    - name: Validar archivo de resultados
+      id: validar-resultados
+      run: |
+        echo "🔍 Validando archivo test-results.json..."
+        node .autograding/validate-results.js
+        
+        # Extraer puntuación del archivo
+        PUNTOS=$(node -p "const r = require('./test-results.json'); r.resumen.puntos_obtenidos")
+        PORCENTAJE=$(node -p "const r = require('./test-results.json'); r.resumen.porcentaje_final")
+        
+        echo "puntos=$PUNTOS" >> $GITHUB_OUTPUT
+        echo "porcentaje=$PORCENTAJE" >> $GITHUB_OUTPUT
+        
+        if [ "$PUNTOS" -ge 60 ]; then
+          echo "aprobado=true" >> $GITHUB_OUTPUT
+        else
+          echo "aprobado=false" >> $GITHUB_OUTPUT
+        fi
+    
+    # Generar reporte detallado
+    - name: Generar reporte
+      if: always()
+      run: |
+        echo "### 📊 Calificación de Ejercicios de Git" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        if [ -f test-results.json ]; then
+          PUNTOS=$(node -p "const r = require('./test-results.json'); r.resumen.puntos_obtenidos")
+          PORCENTAJE=$(node -p "const r = require('./test-results.json'); r.resumen.porcentaje_final")
+          
+          echo "**🎯 Puntuación Final: $PUNTOS / 100 puntos ($PORCENTAJE%)**" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "$PUNTOS" -ge 60 ]; then
+            echo "✅ **APROBADO**" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "📚 **Continúa trabajando en los ejercicios**" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Detalle por Ejercicio:" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Ejercicio | Estado | Puntos |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----------|--------|--------|" >> $GITHUB_STEP_SUMMARY
+          
+          node -e "
+            const results = require('./test-results.json');
+            results.ejercicios.forEach(ej => {
+              const icono = ej.estado === 'aprobado' ? '✅' : 
+                            ej.estado === 'parcial' ? '⚠️' : '❌';
+              console.log(\`| \${icono} \${ej.ejercicio}: \${ej.nombre} | \${ej.tests_aprobados}/\${ej.tests_totales} tests | \${ej.puntos_obtenidos}/\${ej.puntos_posibles} |\`);
+            });
+          " >> $GITHUB_STEP_SUMMARY
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "_Los resultados se basan en el archivo test-results.json generado localmente_" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "❌ **Error: No se encontró el archivo test-results.json**" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Por favor, ejecuta localmente:" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
+          echo "npm run generate-results" >> $GITHUB_STEP_SUMMARY
+          echo "git add test-results.json" >> $GITHUB_STEP_SUMMARY
+          echo "git commit -m 'Agregar resultados de tests'" >> $GITHUB_STEP_SUMMARY
+          echo "git push" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+        fi
+    
+    # Crear tests individuales para autograding (basados en el archivo de resultados)
+    - name: Ejercicio 1 - Git Init
+      id: ejercicio-1
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Ejercicio 1 - Git Init
+        setup-command: ''
+        command: node -e "const r = require('./test-results.json'); const ej = r.ejercicios.find(e => e.ejercicio === 1); if (!ej || ej.puntos_obtenidos === 0) process.exit(1);"
+        timeout: 5
+        max-score: 15
+    
+    - name: Ejercicio 2 - Primer Commit
+      id: ejercicio-2
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Ejercicio 2 - Primer Commit
+        setup-command: ''
+        command: node -e "const r = require('./test-results.json'); const ej = r.ejercicios.find(e => e.ejercicio === 2); if (!ej || ej.puntos_obtenidos === 0) process.exit(1);"
+        timeout: 5
+        max-score: 15
+    
+    - name: Ejercicio 3 - Modificar Commits
+      id: ejercicio-3
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Ejercicio 3 - Modificar Commits
+        setup-command: ''
+        command: node -e "const r = require('./test-results.json'); const ej = r.ejercicios.find(e => e.ejercicio === 3); if (!ej || ej.puntos_obtenidos === 0) process.exit(1);"
+        timeout: 5
+        max-score: 15
+    
+    - name: Ejercicio 4 - Ramas
+      id: ejercicio-4
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Ejercicio 4 - Ramas
+        setup-command: ''
+        command: node -e "const r = require('./test-results.json'); const ej = r.ejercicios.find(e => e.ejercicio === 4); if (!ej || ej.puntos_obtenidos === 0) process.exit(1);"
+        timeout: 5
+        max-score: 15
+    
+    - name: Ejercicio 5 - GitHub Push
+      id: ejercicio-5
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Ejercicio 5 - GitHub Push
+        setup-command: ''
+        command: node -e "const r = require('./test-results.json'); const ej = r.ejercicios.find(e => e.ejercicio === 5); if (!ej || ej.puntos_obtenidos === 0) process.exit(1);"
+        timeout: 5
+        max-score: 15
+    
+    - name: Ejercicio 6 - Pull y Clone
+      id: ejercicio-6
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Ejercicio 6 - Pull y Clone
+        setup-command: ''
+        command: node -e "const r = require('./test-results.json'); const ej = r.ejercicios.find(e => e.ejercicio === 6); if (!ej || ej.puntos_obtenidos === 0) process.exit(1);"
+        timeout: 5
+        max-score: 10
+    
+    - name: Ejercicio 7 - Conflictos
+      id: ejercicio-7
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Ejercicio 7 - Conflictos
+        setup-command: ''
+        command: node -e "const r = require('./test-results.json'); const ej = r.ejercicios.find(e => e.ejercicio === 7); if (!ej || ej.puntos_obtenidos === 0) process.exit(1);"
+        timeout: 5
+        max-score: 15
+    
+    # Subir archivo de resultados como artefacto
+    - name: Subir resultados
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results
+        path: test-results.json
+        retention-days: 90
+    
+    # Reporter de calificaciones
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        EJERCICIO-1_RESULTS: "${{steps.ejercicio-1.outputs.result}}"
+        EJERCICIO-2_RESULTS: "${{steps.ejercicio-2.outputs.result}}"
+        EJERCICIO-3_RESULTS: "${{steps.ejercicio-3.outputs.result}}"
+        EJERCICIO-4_RESULTS: "${{steps.ejercicio-4.outputs.result}}"
+        EJERCICIO-5_RESULTS: "${{steps.ejercicio-5.outputs.result}}"
+        EJERCICIO-6_RESULTS: "${{steps.ejercicio-6.outputs.result}}"
+        EJERCICIO-7_RESULTS: "${{steps.ejercicio-7.outputs.result}}"
+      with:
+        runners: ejercicio-1,ejercicio-2,ejercicio-3,ejercicio-4,ejercicio-5,ejercicio-6,ejercicio-7
