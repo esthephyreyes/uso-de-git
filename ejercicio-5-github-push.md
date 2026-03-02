@@ -16,7 +16,7 @@ Aprender a conectar tu repositorio local con GitHub y subir tus cambios.
 
 2. Si no tienes un remote configurado, añade tu repositorio de GitHub:
    ```bash
-   git remote add origin https://github.com/tuusuario/tu-repositorio.git
+   git remote add origin https://github.com/esthephyreyes/uso-de-git
    ```
 
 3. Verifica que el remote se añadió correctamente:
